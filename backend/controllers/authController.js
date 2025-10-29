@@ -1,8 +1,10 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+// Génération du token JWT
 const generateToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
+// Signup
 const signup = async (req, res) => {
   const { name, email, password, role } = req.body;
   try {
@@ -22,6 +24,7 @@ const signup = async (req, res) => {
   }
 };
 
+// Login
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -42,4 +45,14 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+// GET tous les utilisateurs (admin seulement)
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password"); // ne pas renvoyer le password
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur récupération utilisateurs', error });
+  }
+};
+
+module.exports = { signup, login, getUsers };

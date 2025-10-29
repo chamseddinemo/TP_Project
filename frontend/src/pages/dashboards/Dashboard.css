@@ -1,0 +1,48 @@
+/* Dashboard.css : style global pour tout le tableau de bord */
+
+/* --- Layout global --- */
+.dashboard-wrapper {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.stats-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.user-table {
+  margin-bottom: 30px;
+}
+
+.all-dashboards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* --- Style des dashboards individuels --- */
+.dashboard-container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin: 10px 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dashboard-container h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.dashboard-container p {
+  font-size: 16px;
+  color: #333;
+}

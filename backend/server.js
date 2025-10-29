@@ -11,6 +11,7 @@ const saleRoutes = require('./routes/saleRoutes');
 const purchaseRoutes = require('./routes/purchaseRoutes');
 const hrRoutes = require('./routes/hrRoutes');
 const equipmentRoutes = require('./routes/equipmentRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 dotenv.config();
 connectDB();
@@ -19,6 +20,12 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// ✅ route de test
+app.get("/", (req, res) => {
+  res.send("🚀 Backend connecté !");
+});
+app.use('/api/admin', adminRoutes);
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -32,6 +39,7 @@ app.use('/api/equipements', equipmentRoutes);
 app.use((req, res) => {
   res.status(404).json({ message: 'Route non trouvée' });
 });
+
 
 // Middleware erreurs
 app.use(errorHandler);

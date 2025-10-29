@@ -15,6 +15,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import SectionPage from "./components/SectionPage";
 import Employes from "./pages/sections/Employes";
 import Produits from "./pages/sections/Produits";
+import EmployeesPage from "./pages/rh/EmployeesPage";
+import RecruitmentPage from "./pages/rh/RecruitmentPage";
+import TimesheetsPage from "./pages/rh/TimesheetsPage";
+import PayrollPage from "./pages/rh/PayrollPage";
 
 function App() {
   return (
@@ -84,10 +88,10 @@ function App() {
           />
 
           {/* RH */}
-          <Route path="/rh/employes" element={<ProtectedRoute roles={["rh","admin"]}><Employes /></ProtectedRoute>} />
-          <Route path="/rh/recrutement" element={<ProtectedRoute roles={["rh","admin"]}><SectionPage title="Recrutement" description="Suivi des candidatures et offres." /></ProtectedRoute>} />
-          <Route path="/rh/temps" element={<ProtectedRoute roles={["rh","admin"]}><SectionPage title="Feuilles de temps" description="Pointage et validation des heures." /></ProtectedRoute>} />
-          <Route path="/rh/paie" element={<ProtectedRoute roles={["rh","admin"]}><SectionPage title="Paie & Contrats" description="Gestion des bulletins et contrats." /></ProtectedRoute>} />
+          <Route path="/rh/employes" element={<ProtectedRoute roles={["rh","admin"]}><EmployeesPage /></ProtectedRoute>} />
+          <Route path="/rh/recrutement" element={<ProtectedRoute roles={["rh","admin"]}><RecruitmentPage /></ProtectedRoute>} />
+          <Route path="/rh/temps" element={<ProtectedRoute roles={["rh","admin"]}><TimesheetsPage /></ProtectedRoute>} />
+          <Route path="/rh/paie" element={<ProtectedRoute roles={["rh","admin"]}><PayrollPage /></ProtectedRoute>} />
 
           {/* Stock */}
           <Route path="/stock/produits" element={<ProtectedRoute roles={["stock","admin"]}><Produits /></ProtectedRoute>} />

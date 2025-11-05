@@ -1,13 +1,66 @@
 /* Dashboard.css : style global pour tout le tableau de bord */
 
 /* --- Layout global --- */
+.dashboard-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 73px; /* Espace pour la Navbar fixe */
+}
+
 .dashboard-wrapper {
   display: flex;
+  flex: 1;
+  background-color: #f5f5f5;
+  margin-left: 320px; /* Largeur du sidebar (w-80 = 320px) par défaut */
+  transition: margin-left 0.3s ease-in-out;
+  position: relative;
+  min-height: calc(100vh - 73px);
+}
+
+.dashboard-wrapper.sidebar-collapsed {
+  margin-left: 80px; /* Largeur du sidebar réduit (w-20 = 80px) */
+}
+
+/* Dark mode pour dashboard-wrapper */
+body.dark-mode .dashboard-wrapper {
+  background-color: #111827;
+}
+
+body.light-mode .dashboard-wrapper {
+  background-color: #f5f5f5;
+}
+
+/* Style pour le sidebar fixe - il doit être en dehors du flow normal */
+.dashboard-wrapper > aside {
+  position: fixed !important;
+  left: 0 !important;
+  top: 73px !important; /* Commence exactement sous la Navbar */
+  height: calc(100vh - 73px) !important; /* Hauteur totale moins la Navbar */
+  z-index: 40 !important; /* En dessous de la Navbar qui a z-50 */
+  border-top: none; /* Pas de bordure car c'est intégré avec la Navbar */
+  overflow-y: auto !important; /* Scroll si le contenu dépasse */
+  overflow-x: hidden !important;
+  display: flex !important; /* S'assurer que le sidebar est toujours affiché */
+  flex-direction: column !important;
 }
 
 .main-content {
   flex: 1;
-  padding: 20px;
+  width: 100%;
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 73px);
+  padding-top: 0;
+  transition: background-color 0.3s ease;
+}
+
+/* Dark mode pour main-content */
+body.dark-mode .main-content {
+  background-color: #111827;
+}
+
+body.light-mode .main-content {
+  background-color: #f5f5f5;
 }
 
 .stats-section {
@@ -35,6 +88,17 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   margin: 10px 0;
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .dashboard-container {
+  background-color: #1f2937;
+  color: #ffffff;
+}
+
+body.light-mode .dashboard-container {
+  background-color: #ffffff;
+  color: #111827;
 }
 
 .dashboard-container h1 {
@@ -45,4 +109,39 @@
 .dashboard-container p {
   font-size: 16px;
   color: #333;
+}
+
+body.dark-mode .dashboard-container p {
+  color: #e5e7eb;
+}
+
+body.light-mode .dashboard-container p {
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-container-wrapper {
+    padding-top: 73px;
+  }
+
+  .dashboard-wrapper {
+    margin-left: 0 !important;
+  }
+
+  .dashboard-wrapper > aside {
+    top: 73px !important;
+    z-index: 50 !important; /* Augmenter le z-index en mobile */
+    display: flex !important;
+    position: fixed !important;
+    left: 0 !important;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .stats-section {
+    flex-direction: column;
+  }
 }

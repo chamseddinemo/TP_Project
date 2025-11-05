@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Backend",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}/backend",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "🚀 Lancer ERP-TP (Backend + Frontend)",
+      "configurations": ["Debug Backend"],
+      "preLaunchTask": "🚀 Lancer Frontend",
+      "stopAll": true
+    }
+  ]
+}
+
+

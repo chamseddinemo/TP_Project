@@ -1,18 +1,25 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { FaLock, FaEnvelope } from "react-icons/fa";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // Réinitialiser le mot de passe au montage pour éviter l'autocomplétion
+  React.useEffect(() => {
+    setPassword("");
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     try {
-      const data = await login(email, password); // AuthContext gère stockage
-      // Redirection selon rôle
+      const data = await login(email, password);
       switch (data.role) {
         case "admin": navigate("/dashboard/admin"); break;
         case "stock": navigate("/dashboard/stock"); break;
@@ -24,34 +31,79 @@ const Login = () => {
         default: navigate("/"); break;
       }
     } catch (error) {
-      alert(error.response?.data?.message || "Erreur login");
+      setError(error.response?.data?.message || "Erreur de connexion");
     }
   };
 
   return (
-    <div style={{ display: "grid", placeItems: "center", minHeight: "100vh", padding: "24px" }}>
-      <div className="card" style={{ width: "100%", maxWidth: 420 }}>
-        <h2 style={{ marginBottom: 16 }}>Connexion</h2>
-        <p style={{ marginBottom: 20 }}>Accédez à votre espace ERP-TP</p>
-        <form onSubmit={handleSubmit} style={{ display: "grid", gap: 12 }}>
-          <input
-            className="input"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            className="input"
-            type="password"
-            placeholder="Mot de passe"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit" className="btn btn-primary" style={{ justifyContent: "center" }}>Se connecter</button>
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-900 via-gray-800 to-gray-900">
+      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">ERP-TP</h1>
+          <h2 className="text-xl text-gray-600">Connexion</h2>
+        </div>
+
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Email
+            </label>
+            <div className="relative">
+              <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="email"
+                placeholder="votre@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Mot de passe
+            </label>
+            <div className="relative">
+              <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoComplete="off"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-linear-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          >
+            Se connecter
+          </button>
         </form>
+
+        <div className="mt-6 text-center">
+          <p className="text-gray-600">
+            Pas encore de compte ?{" "}
+            <button
+              onClick={() => navigate("/signup")}
+              className="text-blue-600 hover:text-blue-800 font-semibold"
+            >
+              Créer un compte
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );

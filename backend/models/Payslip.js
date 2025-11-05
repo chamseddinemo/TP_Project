@@ -6,9 +6,11 @@ const payslipSchema = new mongoose.Schema({
   annee: { type: Number, required: true },
   salaireBrut: { type: Number, required: true },
   cotisations: {
-    cnss: Number,
-    retraite: Number,
-    cnam: Number
+    qpp: Number,        // Régime de rentes du Québec (QPP)
+    rqap: Number,       // Régime québécois d'assurance parentale
+    ae: Number,         // Assurance-emploi (EI)
+    rqdc: Number,       // Régime québécois d'assurance parentale (RQDC)
+    impots: Number      // Impôts provinciaux et fédéraux
   },
   salaireNet: { type: Number, required: true },
   heuresNormales: Number,

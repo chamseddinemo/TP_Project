@@ -79,4 +79,20 @@ const updateSale = async (req, res) => {
   }
 };
 
-module.exports = { createSale, getSales, getSaleById, updateSale };
+// Supprimer une vente
+const deleteSale = async (req, res) => {
+  try {
+    const sale = await Sale.findByIdAndDelete(req.params.id);
+
+    if (!sale) {
+      return res.status(404).json({ message: 'Vente non trouvée' });
+    }
+
+    res.json({ message: 'Vente supprimée avec succès' });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur suppression vente', error: error.message });
+  }
+};
+
+module.exports = { createSale, getSales, getSaleById, updateSale, deleteSale };

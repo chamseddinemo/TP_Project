@@ -27,21 +27,53 @@ const signup = async (req, res) => {
 // Login
 const login = async (req, res) => {
   const { email, password } = req.body;
+  
+  console.log('\n🔐 [LOGIN] Tentative de connexion:', { email, password: password ? '***' : 'missing' });
+  
+  // Validation des données
+  if (!email || !password) {
+    console.log('❌ [LOGIN] Email ou mot de passe manquant');
+    return res.status(400).json({ message: 'Email et mot de passe requis' });
+  }
+  
   try {
     const user = await User.findOne({ email });
-    if (user && await user.matchPassword(password)) {
-      res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        token: generateToken(user._id)
-      });
-    } else {
-      res.status(401).json({ message: 'Email ou mot de passe incorrect' });
+    
+    if (!user) {
+      console.log(`❌ [LOGIN] Utilisateur non trouvé: ${email}`);
+      return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
     }
+    
+    console.log(`✅ [LOGIN] Utilisateur trouvé: ${user.name} (${user.role})`);
+    
+    const isPasswordValid = await user.matchPassword(password);
+    
+    if (!isPasswordValid) {
+      console.log(`❌ [LOGIN] Mot de passe incorrect pour: ${email}`);
+      return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
+    }
+    
+    console.log(`✅ [LOGIN] Mot de passe correct pour: ${email}`);
+    
+    // Vérifier que JWT_SECRET est défini
+    if (!process.env.JWT_SECRET) {
+      console.error('❌ JWT_SECRET n\'est pas défini dans .env');
+      return res.status(500).json({ message: 'Erreur de configuration serveur' });
+    }
+    
+    const token = generateToken(user._id);
+    console.log(`✅ [LOGIN] Token généré avec succès pour: ${email}`);
+    
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      token: token
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Erreur login', error });
+    console.error('❌ [LOGIN] Erreur:', error);
+    res.status(500).json({ message: 'Erreur lors de la connexion', error: error.message });
   }
 };
 

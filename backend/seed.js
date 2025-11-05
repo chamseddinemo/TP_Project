@@ -20,14 +20,21 @@ const seedData = async () => {
     await Client.deleteMany();
     await Supplier.deleteMany();
 
-    // Créer un admin
-    const admin = new User({
-      name: 'Admin TP',
-      email: 'admin@tp.com',
-      password: await bcrypt.hash('admin123', 10),
-      role: 'admin'
-    });
-    await admin.save();
+    // Créer les utilisateurs avec différents rôles
+    const users = [
+      { name: 'Admin TP', email: 'admin@tp.com', password: 'admin123', role: 'admin' },
+      { name: 'Gestionnaire Stock', email: 'stock@tp.com', password: '123456', role: 'stock' },
+      { name: 'Responsable Ventes', email: 'vente@tp.com', password: '123456', role: 'vente' },
+      { name: 'Responsable Achats', email: 'achat@tp.com', password: '123456', role: 'achat' },
+      { name: 'Manager RH', email: 'rh@tp.com', password: '123456', role: 'rh' },
+      { name: 'Comptable', email: 'comptable@tp.com', password: '123456', role: 'comptable' },
+      { name: 'Technicien', email: 'technicien@tp.com', password: '123456', role: 'technicien' }
+    ];
+
+    for (const userData of users) {
+      const user = new User(userData);
+      await user.save();
+    }
 
     // Créer un client test
     const client = new Client({
@@ -38,41 +45,39 @@ const seedData = async () => {
     await client.save();
 
     // Créer un fournisseur test
-    const supplier = new Supplier({
+    const supplier = await Supplier.create({
       name: 'Fournisseur Test',
       email: 'supplier@test.com',
       phone: '987654321'
     });
-    await supplier.save();
 
     // Créer quelques produits
-    // Créer quelques produits
-const products = [
-  { 
-    name: 'Produit A', 
-    reference: 'PROD-A',         // <-- obligatoire
-    pricePurchase: 8,            // <-- obligatoire
-    priceSale: 10,               // <-- obligatoire
-    quantity: 100, 
-    supplier: supplier._id 
-  },
-  { 
-    name: 'Produit B', 
-    reference: 'PROD-B', 
-    pricePurchase: 15, 
-    priceSale: 20, 
-    quantity: 50, 
-    supplier: supplier._id 
-  },
-  { 
-    name: 'Produit C', 
-    reference: 'PROD-C', 
-    pricePurchase: 12, 
-    priceSale: 15, 
-    quantity: 75, 
-    supplier: supplier._id 
-  }
-];
+    const products = [
+      { 
+        name: 'Produit A', 
+        reference: 'PROD-A',
+        pricePurchase: 8,
+        priceSale: 10,
+        quantity: 100, 
+        supplier: supplier._id 
+      },
+      { 
+        name: 'Produit B', 
+        reference: 'PROD-B', 
+        pricePurchase: 15, 
+        priceSale: 20, 
+        quantity: 50, 
+        supplier: supplier._id 
+      },
+      { 
+        name: 'Produit C', 
+        reference: 'PROD-C', 
+        pricePurchase: 12, 
+        priceSale: 15, 
+        quantity: 75, 
+        supplier: supplier._id 
+      }
+    ];
 
 
     for (const p of products) {

@@ -1,33 +1,34 @@
 import React from "react";
+import { useTheme } from "../context/ThemeContext";
 
-const CardStat = ({ title, value, color, icon }) => {
+const CardStat = ({ title, value, color, icon, subtitle, onClick }) => {
+  const { darkMode } = useTheme();
+  const isClickable = !!onClick;
+
   return (
-    <div className="card" style={{
-      background: `linear-gradient(135deg, ${color}15 0%, ${color}05 100%)`,
-      borderLeft: `4px solid ${color}`,
-      padding: "20px",
-      minWidth: "200px",
-      display: "flex",
-      flexDirection: "column",
-      gap: "8px",
-      transition: "all 0.3s ease",
-      cursor: "pointer"
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.transform = "translateY(-4px)";
-      e.currentTarget.style.boxShadow = "0 12px 24px rgba(0,0,0,0.15)";
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.transform = "translateY(0)";
-      e.currentTarget.style.boxShadow = "";
-    }}
+    <div
+      className={`rounded-lg shadow-md p-6 border-l-4 transition-all duration-200 ${
+        darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+      } ${
+        isClickable ? "cursor-pointer hover:shadow-lg hover:-translate-y-1" : ""
+      }`}
+      style={{ borderLeftColor: color || "#2196F3", minWidth: "200px" }}
+      onClick={onClick}
     >
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ fontSize: "13px", fontWeight: 600, opacity: 0.7, textTransform: "uppercase", letterSpacing: "0.5px" }}>{title}</span>
-        {icon && <span style={{ fontSize: "24px", opacity: 0.6 }}>{icon}</span>}
+      <div className="flex items-center justify-between mb-2">
+        <h4 className={`text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+          {title}
+        </h4>
+        {icon && <div style={{ color: color || "#2196F3" }}>{icon}</div>}
       </div>
-      <div style={{ fontSize: "32px", fontWeight: 700, color: color }}>{value}</div>
-      <div style={{ fontSize: "12px", opacity: 0.6 }}>vs période précédente</div>
+      <p className="text-3xl font-bold mb-1" style={{ color: color || "#2196F3" }}>
+        {value}
+      </p>
+      {subtitle && (
+        <p className={`text-xs ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 };

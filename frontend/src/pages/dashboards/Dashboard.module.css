@@ -1,0 +1,14 @@
+.container {
+  padding: 20px;
+  min-height: 80vh;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1rem;
+  color: #555;
+}

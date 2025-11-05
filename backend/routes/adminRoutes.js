@@ -14,12 +14,12 @@ router.get('/stats', authMiddleware, roleMiddleware(['admin']), async (req, res)
   try {
     // --- Comptages principaux ---
     const totalUsers = await User.countDocuments();
-    const totalProducts = await Product.countDocuments();     // Produits / Stocks
-    const totalVentes = await User.countDocuments({ role: 'vente' });
-    const totalAchats = await Purchase.countDocuments();
-    const totalRH = await User.countDocuments({ role: 'rh' });
-    const totalFinance = await User.countDocuments({ role: 'comptable' });
-    const totalEquipments = await Equipment.countDocuments();
+    const totalProducts = await Product.countDocuments();     // Produits en stock
+    const totalVentes = await Sale.countDocuments();          // Nombre de ventes
+    const totalAchats = await Purchase.countDocuments();      // Nombre d'achats
+    const totalRH = await Employee.countDocuments();          // Nombre d'employés
+    const totalFinance = await User.countDocuments({ role: 'comptable' }); // Comptables
+    const totalEquipments = await Equipment.countDocuments(); // Équipements
 
     // --- Liste utilisateurs ---
     const usersList = await User.find({}, 'name email role createdAt').sort({ createdAt: -1 });

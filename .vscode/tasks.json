@@ -1,0 +1,55 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Lancer Backend",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": false,
+        "group": "backend"
+      },
+      "runOptions": {
+        "runOn": "default"
+      }
+    },
+    {
+      "label": "🚀 Lancer Frontend",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": false,
+        "group": "frontend"
+      },
+      "runOptions": {
+        "runOn": "default"
+      }
+    },
+    {
+      "label": "🚀 Lancer Tout (Backend + Frontend)",
+      "dependsOn": [
+        "🚀 Lancer Backend",
+        "🚀 Lancer Frontend"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    }
+  ]
+}
+
+

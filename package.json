@@ -1,11 +1,19 @@
 {
-  "dependencies": {
-    "axios": "^1.13.1",
-    "react-icons": "^5.5.0",
-    "react-router-dom": "^7.9.4",
-    "react-toastify": "^11.0.5"
+  "name": "erp-tp",
+  "version": "1.0.0",
+  "description": "ERP-TP - Système de gestion intégré pour Travaux Publics",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run dev"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "postcss": "^8.5.6"
+    "concurrently": "^9.1.0"
   }
 }

@@ -7,6 +7,8 @@ export const rolePermissions = {
       "RH & Employés",
       "Produits & Stocks",
       "Équipements",
+      "Ventes & Achats",
+      "Finance",
       "Notifications",
       "Paramètres"
     ],
@@ -14,6 +16,8 @@ export const rolePermissions = {
       "RH & Employés": ["Employés", "Recrutement", "Feuilles de temps", "Paie & Contrats"],
       "Produits & Stocks": ["Liste produits", "Catégories", "Stocks & Inventaire", "Fournisseurs"],
       "Équipements": ["Liste équipements"],
+      "Ventes & Achats": ["Commandes clients", "Facturation", "Devis & Bons", "Achats"],
+      "Finance": ["Transactions", "Salaires", "Rapports financiers", "Budgets & prévisions"],
       "Paramètres": ["Profil"]
     }
   },
@@ -26,7 +30,10 @@ export const rolePermissions = {
   },
   client: {
     dashboard: "/dashboard/client",
-    menus: ["Tableau de bord"]
+    menus: ["Tableau de bord", "Ventes & Achats"],
+    subMenus: {
+      "Ventes & Achats": ["Commandes clients", "Devis & Bons"]
+    }
   },
   // Compatibilité avec les rôles historiques de la base de données
   stock: {
@@ -44,16 +51,26 @@ export const rolePermissions = {
     }
   },
   vente: {
-    dashboard: "/dashboard/client",
-    menus: ["Tableau de bord"]
+    dashboard: "/dashboard/vente",
+    menus: ["Tableau de bord", "Ventes & Achats"],
+    subMenus: {
+      "Ventes & Achats": ["Commandes clients", "Facturation", "Devis & Bons"]
+    }
   },
   achat: {
-    dashboard: "/dashboard/employe",
-    menus: ["Tableau de bord"]
+    dashboard: "/dashboard/achat",
+    menus: ["Tableau de bord", "Ventes & Achats"],
+    subMenus: {
+      "Ventes & Achats": ["Achats"]
+    }
   },
   comptable: {
-    dashboard: "/dashboard/employe",
-    menus: ["Tableau de bord"]
+    dashboard: "/dashboard/finance",
+    menus: ["Tableau de bord", "Finance", "Ventes & Achats"],
+    subMenus: {
+      "Finance": ["Transactions", "Salaires", "Rapports financiers", "Budgets & prévisions"],
+      "Ventes & Achats": ["Facturation"]
+    }
   },
   technicien: {
     dashboard: "/dashboard/equipement",

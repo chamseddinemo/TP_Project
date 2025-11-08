@@ -9,6 +9,9 @@ import ClientDashboard from "./pages/dashboards/ClientDashboard";
 import DashboardStock from "./pages/dashboards/DashboardStock";
 import DashboardRH from "./pages/dashboards/DashboardRH";
 import DashboardEquipment from "./pages/dashboards/DashboardEquipment";
+import DashboardVentes from "./pages/dashboards/DashboardVentes";
+import DashboardAchats from "./pages/dashboards/DashboardAchats";
+import DashboardFinance from "./pages/dashboards/DashboardFinance";
 import AdminAlertsPage from "./pages/admin/AdminAlertsPage";
 import ProfileSettingsPage from "./pages/admin/ProfileSettingsPage";
 import EmployeesPage from "./pages/rh/EmployeesPage";
@@ -20,6 +23,14 @@ import CategoriesPage from "./pages/stock/CategoriesPage";
 import InventoryPage from "./pages/stock/InventoryPage";
 import SuppliersPage from "./pages/stock/SuppliersPage";
 import EquipmentListPage from "./pages/equipements/EquipmentListPage";
+import OrdersPage from "./pages/vente/OrdersPage";
+import InvoicingPage from "./pages/vente/InvoicingPage";
+import QuotesPage from "./pages/vente/QuotesPage";
+import PurchasesPage from "./pages/achat/PurchasesPage";
+import TransactionsPage from "./pages/finance/TransactionsPage";
+import SalariesPage from "./pages/finance/SalariesPage";
+import ReportsPage from "./pages/finance/ReportsPage";
+import BudgetsPage from "./pages/finance/BudgetsPage";
 import { AuthProvider } from "./context/AuthContext";
 import { SidebarProvider } from "./context/SidebarContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -84,12 +95,36 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/dashboard/vente"
+            element={
+              <ProtectedRoute roles={["vente", "admin"]}>
+                <DashboardVentes />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/achat"
+            element={
+              <ProtectedRoute roles={["achat", "admin"]}>
+                <DashboardAchats />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/finance"
+            element={
+              <ProtectedRoute roles={["comptable", "admin"]}>
+                <DashboardFinance />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Page Paramètres Profil */}
           <Route
             path="/admin/profile"
             element={
-              <ProtectedRoute roles={["admin", "employee", "client", "stock", "vente", "rh"]}>
+              <ProtectedRoute roles={["admin", "employee", "client", "stock", "vente", "rh", "achat", "comptable"]}>
                 <ProfileSettingsPage />
               </ProtectedRoute>
             }
@@ -177,6 +212,75 @@ function App() {
             element={
               <ProtectedRoute roles={["admin", "technicien"]}>
                 <EquipmentListPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* Modules Ventes */}
+          <Route
+            path="/vente/commandes"
+            element={
+              <ProtectedRoute roles={["admin", "vente"]}>
+                <OrdersPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/vente/factures"
+            element={
+              <ProtectedRoute roles={["admin", "vente", "comptable"]}>
+                <InvoicingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/vente/devis"
+            element={
+              <ProtectedRoute roles={["admin", "vente"]}>
+                <QuotesPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Modules Achats */}
+          <Route
+            path="/achat/achats"
+            element={
+              <ProtectedRoute roles={["admin", "achat"]}>
+                <PurchasesPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Modules Finance & Rapports */}
+          <Route
+            path="/finance/transactions"
+            element={
+              <ProtectedRoute roles={["admin", "comptable"]}>
+                <TransactionsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/finance/salaires"
+            element={
+              <ProtectedRoute roles={["admin", "comptable", "rh"]}>
+                <SalariesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/finance/rapports"
+            element={
+              <ProtectedRoute roles={["admin", "comptable"]}>
+                <ReportsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/finance/budgets"
+            element={
+              <ProtectedRoute roles={["admin", "comptable"]}>
+                <BudgetsPage />
               </ProtectedRoute>
             }
           />

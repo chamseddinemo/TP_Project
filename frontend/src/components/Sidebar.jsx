@@ -3,6 +3,8 @@ import {
   FaChartLine,
   FaUsers,
   FaBox,
+  FaShoppingCart,
+  FaMoneyBill,
   FaTools,
   FaCog,
   FaBell,
@@ -52,6 +54,28 @@ const allMenus = [
     color: "from-purple-500 to-purple-600",
     subMenus: [
       { title: "Liste équipements", path: "/equipements/liste" }
+    ]
+  },
+  {
+    title: "Ventes & Achats",
+    icon: FaShoppingCart,
+    color: "from-orange-500 to-orange-600",
+    subMenus: [
+      { title: "Commandes clients", path: "/vente/commandes" },
+      { title: "Facturation", path: "/vente/factures" },
+      { title: "Devis & Bons", path: "/vente/devis" },
+      { title: "Achats", path: "/achat/achats" }
+    ]
+  },
+  {
+    title: "Finance",
+    icon: FaMoneyBill,
+    color: "from-teal-500 to-teal-600",
+    subMenus: [
+      { title: "Transactions", path: "/finance/transactions" },
+      { title: "Salaires", path: "/finance/salaires" },
+      { title: "Rapports financiers", path: "/finance/rapports" },
+      { title: "Budgets & prévisions", path: "/finance/budgets" }
     ]
   },
   {

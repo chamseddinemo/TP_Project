@@ -13,6 +13,9 @@ const hrRoutes = require('./routes/hrRoutes');
 const stockRoutes = require('./routes/stockRoutes');
 const equipmentRoutes = require('./routes/equipmentRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const saleRoutes = require('./routes/saleRoutes');
+const purchaseRoutes = require('./routes/purchaseRoutes');
+const financeRoutes = require('./routes/financeRoutes');
 
 dotenv.config();
 connectDB();
@@ -88,6 +91,9 @@ app.use('/api/rh', hrRoutes);
 app.use('/api/stock', stockRoutes);
 app.use('/api/equipements', equipmentRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/vente', saleRoutes);
+app.use('/api/achat', purchaseRoutes);
+app.use('/api/finance', financeRoutes);
 
 // Socket.io connection handling
 io.on('connection', (socket) => {

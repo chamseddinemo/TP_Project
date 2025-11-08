@@ -47,7 +47,23 @@
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
-      }
+      },
+      "isBackground": true
+    },
+    {
+      "label": "🚀 Lancer avec npm run dev",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      },
+      "isBackground": true
     }
   ]
 }

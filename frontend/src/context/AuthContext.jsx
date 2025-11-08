@@ -17,11 +17,20 @@ export const AuthProvider = ({ children }) => {
 
   // Login
   const login = async (email, password) => {
-    const data = await loginService(email, password);
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data));
-    setUser(data);
-    return data; // retour pour redirection dans Login.jsx
+    try {
+      const data = await loginService(email, password);
+      if (!data || !data.token) {
+        throw new Error("Réponse invalide du serveur");
+      }
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data));
+      setUser(data);
+      return data; // retour pour redirection dans Login.jsx
+    } catch (error) {
+      console.error("Erreur lors de la connexion:", error);
+      // Propager l'erreur pour qu'elle soit gérée par Login.jsx
+      throw error;
+    }
   };
 
   const logout = () => {

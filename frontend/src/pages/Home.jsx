@@ -64,7 +64,7 @@ const Home = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#1E3A8A] via-[#2563EB] to-[#3B82F6] text-white py-20 lg:py-32 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#1E3A8A] via-[#2563EB] to-[#3B82F6] text-white py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
@@ -228,7 +228,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-linear-to-r from-[#1E3A8A] to-[#2563EB] text-white">
+      <section className="py-20 bg-gradient-to-r from-[#1E3A8A] to-[#2563EB] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Prêt à améliorer la gestion de votre entreprise ?

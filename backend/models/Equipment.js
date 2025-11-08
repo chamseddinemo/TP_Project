@@ -13,7 +13,6 @@ const equipmentSchema = new mongoose.Schema({
   code: { 
     type: String, 
     required: true, 
-    unique: true,
     trim: true,
     uppercase: true
   },
@@ -64,8 +63,8 @@ const equipmentSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-// Index pour optimiser les recherches
-equipmentSchema.index({ code: 1 });
+// Index pour optimiser les recherches (unique sur code pour éviter les doublons)
+equipmentSchema.index({ code: 1 }, { unique: true });
 equipmentSchema.index({ category: 1 });
 equipmentSchema.index({ status: 1 });
 equipmentSchema.index({ responsible: 1 });

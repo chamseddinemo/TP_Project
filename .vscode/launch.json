@@ -2,22 +2,26 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Backend",
+      "name": "🔧 Debug Backend seul",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "cwd": "${workspaceFolder}/backend",
       "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen"
-    }
-  ],
-  "compounds": [
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"]
+    },
     {
-      "name": "🚀 Lancer ERP-TP (Backend + Frontend)",
-      "configurations": ["Debug Backend"],
-      "preLaunchTask": "🚀 Lancer Frontend",
-      "stopAll": true
+      "name": "🚀 Lancer Backend + Frontend (Recommandé)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }

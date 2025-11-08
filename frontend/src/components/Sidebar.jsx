@@ -169,7 +169,7 @@ const Sidebar = ({ role }) => {
   }, [navigate]);
 
   return (
-    <aside className={`${darkMode ? "bg-linear-to-b from-gray-900 to-gray-800 text-white" : "bg-linear-to-b from-white to-gray-50 text-gray-900"} 
+    <aside className={`${darkMode ? "bg-gradient-to-b from-gray-900 to-gray-800 text-white" : "bg-gradient-to-b from-white to-gray-50 text-gray-900"} 
                       fixed left-0 flex flex-col transition-all duration-300 ease-in-out z-40
                       ${collapsed ? "w-20" : "w-80"} shadow-2xl border-r ${darkMode ? "border-gray-700" : "border-gray-200"}`}
                       style={{ willChange: 'width' }}>
@@ -201,7 +201,7 @@ const Sidebar = ({ role }) => {
               <div key={menu.title} className="group mb-2">
                 <div
                   onClick={() => menu.subMenus ? toggleMenu(menu.title) : handleNavigate(menu.path)}
-                  className={`flex items-center justify-between p-4 cursor-pointer hover:shadow-lg transition-all duration-300 rounded-xl m-1 bg-linear-to-r ${menu.color} ${darkMode ? "bg-opacity-30 hover:bg-opacity-50" : "bg-opacity-20 hover:bg-opacity-40"} ${isActive ? "ring-2 ring-opacity-50 " + (darkMode ? "ring-white" : "ring-gray-800") : ""}`}
+                  className={`flex items-center justify-between p-4 cursor-pointer hover:shadow-lg transition-all duration-300 rounded-xl m-1 bg-gradient-to-r ${menu.color} ${darkMode ? "bg-opacity-30 hover:bg-opacity-50" : "bg-opacity-20 hover:bg-opacity-40"} ${isActive ? "ring-2 ring-opacity-50 " + (darkMode ? "ring-white" : "ring-gray-800") : ""}`}
                   title={collapsed ? menu.title : ""}
                 >
                   <div className="flex items-center gap-4">

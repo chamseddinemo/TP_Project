@@ -18,74 +18,19 @@ import { rolePermissions } from "../utils/rolePermissions";
 
 // Déplacer allMenus en dehors du composant pour éviter les recréations
 const allMenus = [
-  { 
-    title: "Tableau de bord", 
-    icon: FaChartLine, 
-    path: "/dashboard/admin", 
+  {
+    title: "Tableau de bord",
+    icon: FaChartLine,
+    path: "/dashboard/admin",
     color: "from-blue-500 to-blue-600",
     getPath: (role) => rolePermissions[role]?.dashboard || "/dashboard/admin"
   },
-  { 
-    title: "RH & Employés", 
-    icon: FaUsers, 
-    color: "from-green-500 to-green-600", 
+  {
+    title: "Paramètres",
+    icon: FaCog,
+    color: "from-gray-500 to-gray-600",
     subMenus: [
-      { title: "Employés", path: "/rh/employes" },
-      { title: "Recrutement", path: "/rh/recrutement" },
-      { title: "Feuilles de temps", path: "/rh/temps" },
-      { title: "Paie & Contrats", path: "/rh/paie" }
-    ]
-  },
-  { 
-    title: "Produits & Stocks", 
-    icon: FaBox, 
-    color: "from-yellow-500 to-yellow-600", 
-    subMenus: [
-      { title: "Liste produits", path: "/stock/produits" },
-      { title: "Catégories", path: "/stock/categories" },
-      { title: "Stocks & Inventaire", path: "/stock/inventaire" },
-      { title: "Fournisseurs", path: "/stock/fournisseurs" }
-    ]
-  },
-  { 
-    title: "Ventes & Achats", 
-    icon: FaShoppingCart, 
-    color: "from-orange-500 to-orange-600", 
-    subMenus: [
-      { title: "Commandes clients", path: "/vente/commandes" },
-      { title: "Facturation", path: "/vente/factures" },
-      { title: "Achats", path: "/achat/achats" },
-      { title: "Devis & Bons", path: "/achat/devis" }
-    ]
-  },
-  { 
-    title: "Finance", 
-    icon: FaMoneyBill, 
-    color: "from-teal-500 to-teal-600", 
-    subMenus: [
-      { title: "Transactions", path: "/finance/transactions" },
-      { title: "Salaires", path: "/finance/salaires" },
-      { title: "Rapports financiers", path: "/finance/rapports" },
-      { title: "Budgets & prévisions", path: "/finance/budgets" }
-    ]
-  },
-  { 
-    title: "Équipements", 
-    icon: FaTools, 
-    color: "from-purple-500 to-purple-600", 
-    subMenus: [
-      { title: "Liste équipements", path: "/equipements/liste" }
-    ]
-  },
-  { 
-    title: "Paramètres", 
-    icon: FaCog, 
-    color: "from-gray-500 to-gray-600", 
-    subMenus: [
-      { title: "Gestion des rôles", path: "/settings/roles" },
-      { title: "Sécurité & accès", path: "/settings/securite" },
-      { title: "Journal d'activité", path: "/settings/journal" },
-      { title: "Paramètres système", path: "/settings/systeme" }
+      { title: "Profil", path: "/admin/profile" }
     ]
   }
 ];

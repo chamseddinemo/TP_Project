@@ -1,232 +1,110 @@
-# ERP-TP
+# 🌱 Sprint 1 – Base & Authentification (ERP-TP)
 
-**ERP interne spécialisé pour le domaine TP (Travaux Publics)**  
-Système de gestion complet pour entreprise de travaux publics : stock, ventes, achats, clients, fournisseurs, employés et équipements.
-
----
-
-## ⚙️ Technologies
-
-- **Backend** : Node.js, Express.js, MongoDB, Mongoose  
-- **Frontend** : React, Vite, Tailwind CSS  
-- **Authentification** : JWT + rôles (admin, stock, vente, achat, RH, technicien, comptable)
+Cette branche concentre les fondations de l’ERP : authentification sécurisée, accès aux rôles essentiels (administrateur, employé, client) et tableaux de bord simplifiés. Elle sert de socle pour les évolutions ultérieures.
 
 ---
 
-## 🚀 Démarrage Rapide
+## 🎯 Objectifs du sprint
 
-### Prérequis
+- Mettre en place l’architecture Backend + Frontend prête à l’emploi.
+- Gérer l’authentification via JWT (inscription, connexion, rôles).
+- Fournir des tableaux de bord dédiés aux rôles principaux (admin, employé, client).
+- Poser les bases UI/UX (layout, thème clair/sombre, navigation).
 
-- Node.js (v14 ou supérieur)
-- MongoDB (local ou Atlas)
-- npm ou yarn
+---
 
-### Installation
+## ✅ Fonctionnalités incluses
 
-1. **Installer les dépendances**
+- Authentification complète : inscription, login, déconnexion, protection des routes.
+- Gestion des utilisateurs côté admin (liste & rôles).
+- Tableau de bord administrateur connecté aux statistiques backend.
+- Tableaux de bord employé et client (contenu pédagogique, sans modules métiers).
+- Layout réactif avec barre latérale filtrée selon le rôle connecté.
 
-```powershell
-# À la racine du projet
-npm install
+> ℹ️ Les modules RH, Stocks, Ventes, Achats, Finance, Notifications et Équipements seront activés dans les sprints suivants.
 
-# Backend
+---
+
+## 🚀 Mise en route (Backend + Frontend)
+
+### 1. Pré-requis
+- Node.js 18+
+- MongoDB local (par défaut : `mongodb://localhost:27017/erp-tp`)
+
+### 2. Configuration
+```bash
 cd backend
 npm install
+cp .env.example .env   # ou node create-env.js
 
-# Frontend
 cd ../frontend
 npm install
 ```
 
-2. **Configurer l'environnement**
-
-Créez un fichier `backend/.env` :
-
-```env
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/erp-tp
-JWT_SECRET=votre_secret_jwt_super_securise_2024_12345
-FRONTEND_URL=http://localhost:5173
-```
-
-3. **Démarrer MongoDB**
-
-```powershell
-# Option 1: Service Windows
-net start MongoDB
-
-# Option 2: Script fourni
-.\start-mongodb.bat
-
-# Option 3: Manuellement
-mongod --dbpath C:\data\db
-```
-
-4. **Initialiser la base de données**
-
-```powershell
+### 3. Lancer les services
+```bash
+# Terminal 1 – Backend
 cd backend
-node seedAll.js
-```
+npm run dev
 
-5. **Démarrer l'application**
-
-```powershell
-# À la racine du projet
+# Terminal 2 – Frontend
+cd frontend
 npm run dev
 ```
 
-L'application sera accessible sur :
-- **Frontend** : http://localhost:5173
-- **Backend** : http://localhost:5000
+### 4. URLs
+- Backend API : http://localhost:5000
+- Frontend : http://localhost:5173
 
 ---
 
-## 🔐 Comptes de Test
+## 🔐 Comptes de démonstration
 
-Après avoir exécuté `seedAll.js`, vous pouvez vous connecter avec :
+| Rôle        | Email             | Mot de passe |
+|-------------|-------------------|--------------|
+| Administrateur | admin@tp.com     | admin123     |
+| Employé (stock) | stock@tp.com     | 123456       |
+| Client (vente)  | vente@tp.com     | 123456       |
 
-| Rôle | Email | Mot de passe |
-|------|-------|--------------|
-| **Admin** | admin@tp.com | admin123 |
-| Stock | stock@tp.com | 123456 |
-| Ventes | vente@tp.com | 123456 |
-| Achats | achat@tp.com | 123456 |
-| RH | rh@tp.com | 123456 |
-| Comptable | comptable@tp.com | 123456 |
-| Technicien | technicien@tp.com | 123456 |
+> Utilisez l’écran de connexion (`/login`) pour accéder aux tableaux de bord correspondants.
 
 ---
 
-## 📦 Modules Disponibles
+## 🧭 Navigation dans cette version
 
-### Stock
-- Gestion des produits
-- Suivi des quantités
-- Alertes de stock faible
-- Catégories de produits
-
-### Ventes
-- Création de propositions
-- Génération de devis
-- Facturation
-- Gestion des clients
-
-### Achats
-- Commandes fournisseurs
-- Réception de marchandises
-- Gestion des fournisseurs
-- Historique des achats
-
-### Ressources Humaines
-- Gestion des employés
-- Fiches de paie
-- Contrats de travail
-- Feuilles de temps
-- Recrutement
-
-### Finance
-- Budgets
-- Transactions
-- Rapports financiers
-- Salaires
-
-### Équipements
-- Suivi des équipements
-- Maintenance préventive
-- Historique de maintenance
-- Statut des équipements
+- **Admin** → `/dashboard/admin` : vue métriques/alertes + gestion des utilisateurs.
+- **Employé** → `/dashboard/employe` : vue synthétique (soit utilisateur rôle `stock`, `rh`, `employee`, etc.).
+- **Client** → `/dashboard/client` : aperçu simplifié (rôle `vente` ou `client`).
+- `Profil` accessible à tous via le menu latéral ou le menu utilisateur (navbar).
 
 ---
 
-## 🛠️ Commandes Utiles
+## 🧪 Vérifications rapides
 
-### Démarrage
-```powershell
-npm run dev                    # Démarrer backend + frontend
-npm run dev:backend           # Démarrer uniquement le backend
-npm run dev:frontend          # Démarrer uniquement le frontend
-```
-
-### Base de données
-```powershell
+```bash
+# Tester la connexion DB
 cd backend
-node setup-database.js        # Vérifier la connexion MongoDB
-node seedAll.js               # Initialiser toutes les données
-node seedEmployees.js         # Initialiser uniquement les employés
-```
+node setup-database.js
 
-### MongoDB
-```powershell
-net start MongoDB             # Démarrer MongoDB (Windows)
-.\start-mongodb.bat           # Script de démarrage
+# Vérifier les API essentielles
+curl http://localhost:5000/api/auth/ping
+curl http://localhost:5000/api/admin/stats
 ```
 
 ---
 
-## 📁 Structure du Projet
+## 🔗 Branche précédente
 
-```
-ERP-TP/
-├── backend/              # API Node.js/Express
-│   ├── config/          # Configuration
-│   ├── controllers/     # Contrôleurs
-│   ├── models/          # Modèles MongoDB
-│   ├── routes/          # Routes API
-│   ├── middleware/      # Middlewares
-│   ├── utils/           # Utilitaires
-│   ├── server.js        # Point d'entrée
-│   └── seedAll.js       # Script d'initialisation
-│
-├── frontend/            # Application React
-│   ├── src/
-│   │   ├── components/  # Composants réutilisables
-│   │   ├── pages/       # Pages de l'application
-│   │   ├── services/    # Services API
-│   │   ├── context/     # Contextes React
-│   │   └── utils/       # Utilitaires
-│   └── vite.config.js
-│
-├── README.md            # Ce fichier
-├── DEMARRAGE_RAPIDE.md  # Guide de démarrage détaillé
-└── package.json         # Configuration du projet
-```
+- `main` – version complète du produit (toutes fonctionnalités).  
+  Utilisez `git checkout main` pour revenir à la version finale.
 
 ---
 
-## 🔧 Résolution de Problèmes
+## 🔄 Prochain sprint
 
-### MongoDB ne démarre pas
-```powershell
-# Vérifier le service
-Get-Service MongoDB
-
-# Démarrer le service
-net start MongoDB
-
-# Ou démarrer manuellement
-mongod --dbpath C:\data\db
-```
-
-### Port déjà utilisé
-- Backend : Changez `PORT` dans `backend/.env`
-- Frontend : Vite utilisera automatiquement le port suivant disponible
-
-### Erreur de connexion MongoDB
-- Vérifiez que MongoDB est démarré
-- Vérifiez `MONGO_URI` dans `backend/.env`
-- Utilisez MongoDB Atlas (cloud) si nécessaire
+- `sprint2` activera les modules **RH**, **Stocks** et **Équipements**, ainsi que les notifications internes de base.
 
 ---
 
-## 📝 Licence
+Bon sprint et bonne démo ! 🚀
 
-MIT License
-
----
-
-## 📞 Support
-
-Pour plus d'informations, consultez `DEMARRAGE_RAPIDE.md`
-
-**Bon développement ! 🚀**

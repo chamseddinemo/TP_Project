@@ -1,92 +1,44 @@
-// Permissions par rôle pour les menus
+// Permissions par rôle pour le Sprint 1
 export const rolePermissions = {
   admin: {
     dashboard: "/dashboard/admin",
-    menus: [
-      "Tableau de bord",
-      "RH & Employés",
-      "Produits & Stocks",
-      "Ventes & Achats",
-      "Finance",
-      "Équipements",
-      "Paramètres"
-    ],
+    menus: ["Tableau de bord", "Paramètres"],
     subMenus: {
-      "RH & Employés": ["Employés", "Recrutement", "Feuilles de temps", "Paie & Contrats"],
-      "Produits & Stocks": ["Liste produits", "Catégories", "Stocks & Inventaire", "Fournisseurs"],
-      "Ventes & Achats": ["Commandes clients", "Facturation", "Achats", "Devis & Bons"],
-      "Finance": ["Transactions", "Salaires", "Rapports financiers", "Budgets & prévisions"],
-      "Équipements": ["Liste équipements", "Maintenance planifiée", "Historique réparations"],
-      "Paramètres": ["Gestion des rôles", "Sécurité & accès", "Journal d'activité", "Paramètres système"]
+      "Paramètres": ["Profil"]
     }
   },
+  employee: {
+    dashboard: "/dashboard/employe",
+    menus: ["Tableau de bord"]
+  },
+  client: {
+    dashboard: "/dashboard/client",
+    menus: ["Tableau de bord"]
+  },
+  // Compatibilité avec les rôles historiques de la base de données
   stock: {
-    dashboard: "/dashboard/stock",
-    menus: [
-      "Tableau de bord",
-      "Produits & Stocks"
-    ],
-    subMenus: {
-      "Produits & Stocks": ["Liste produits", "Catégories", "Stocks & Inventaire", "Fournisseurs"]
-    }
-  },
-  vente: {
-    dashboard: "/dashboard/vente",
-    menus: [
-      "Tableau de bord",
-      "Ventes & Achats"
-    ],
-    subMenus: {
-      "Ventes & Achats": ["Commandes clients", "Facturation", "Devis & Bons"]
-    }
-  },
-  achat: {
-    dashboard: "/dashboard/achat",
-    menus: [
-      "Tableau de bord",
-      "Produits & Stocks",
-      "Ventes & Achats"
-    ],
-    subMenus: {
-      "Produits & Stocks": ["Fournisseurs"],
-      "Ventes & Achats": ["Achats"]
-    }
+    dashboard: "/dashboard/employe",
+    menus: ["Tableau de bord"]
   },
   rh: {
-    dashboard: "/dashboard/rh",
-    menus: [
-      "Tableau de bord",
-      "RH & Employés",
-      "Finance"
-    ],
-    subMenus: {
-      "RH & Employés": ["Employés", "Recrutement", "Feuilles de temps", "Paie & Contrats"],
-      "Finance": ["Salaires"]
-    }
+    dashboard: "/dashboard/employe",
+    menus: ["Tableau de bord"]
+  },
+  vente: {
+    dashboard: "/dashboard/client",
+    menus: ["Tableau de bord"]
+  },
+  achat: {
+    dashboard: "/dashboard/employe",
+    menus: ["Tableau de bord"]
   },
   comptable: {
-    dashboard: "/dashboard/finance",
-    menus: [
-      "Tableau de bord",
-      "Ventes & Achats",
-      "Finance",
-      "RH & Employés"
-    ],
-    subMenus: {
-      "Ventes & Achats": ["Facturation"],
-      "Finance": ["Transactions", "Salaires", "Rapports financiers", "Budgets & prévisions"],
-      "RH & Employés": ["Paie & Contrats"]
-    }
+    dashboard: "/dashboard/employe",
+    menus: ["Tableau de bord"]
   },
   technicien: {
-    dashboard: "/dashboard/equipement",
-    menus: [
-      "Tableau de bord",
-      "Équipements"
-    ],
-    subMenus: {
-      "Équipements": ["Liste équipements", "Maintenance planifiée", "Historique réparations"]
-    }
+    dashboard: "/dashboard/employe",
+    menus: ["Tableau de bord"]
   }
 };
 

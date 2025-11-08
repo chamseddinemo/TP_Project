@@ -5,10 +5,10 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { 
-    type: String, 
-    enum: ['admin','stock','achat','vente','rh','comptable','technicien'], 
-    default: 'vente' 
+  role: {
+    type: String,
+    enum: ['admin','employee','client','stock','achat','vente','rh','comptable','technicien'],
+    default: 'client'
   }
 }, { timestamps: true });
 

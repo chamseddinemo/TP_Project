@@ -1,8 +1,8 @@
 import React, { useContext, useState, useRef, useEffect, memo } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
-import { useNavigate, Link } from "react-router-dom";
-import { FaSignOutAlt, FaUserCircle, FaChevronDown, FaEnvelope, FaUser, FaShieldAlt, FaChartLine, FaEdit, FaLock, FaSun, FaMoon } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { FaSignOutAlt, FaUserCircle, FaChevronDown, FaEnvelope, FaUser, FaShieldAlt, FaEdit, FaLock, FaSun, FaMoon } from "react-icons/fa";
 
 const Navbar = memo(() => {
   const { user, logout } = useContext(AuthContext);
@@ -37,6 +37,8 @@ const Navbar = memo(() => {
   const getRoleLabel = (role) => {
     const labels = {
       admin: "Administrateur",
+      employee: "Employé",
+      client: "Client",
       stock: "Gestionnaire Stock",
       vente: "Vente",
       achat: "Achat",
@@ -51,15 +53,6 @@ const Navbar = memo(() => {
     <nav className={`${darkMode ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-800 border-gray-200'} shadow-md border-b px-6 py-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50 w-full h-[73px] transition-colors duration-300`}>
       <div className="flex items-center gap-3">
         <h2 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>ERP-TP</h2>
-        {user && user.role === "admin" && (
-          <Link
-            to="/admin/graphiques"
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors duration-200 text-sm font-medium ${darkMode ? 'hover:bg-gray-700 text-gray-200' : 'hover:bg-gray-100 text-gray-700'}`}
-          >
-            <FaChartLine className="text-blue-600" />
-            <span className="hidden md:inline">Graphiques et Visualisations</span>
-          </Link>
-        )}
       </div>
       
       <div className="flex items-center gap-4">

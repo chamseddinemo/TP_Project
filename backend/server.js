@@ -6,16 +6,9 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const { errorHandler } = require('./utils/errorHandler');
 
-// Routes
+// Routes (Sprint 1 scope)
 const authRoutes = require('./routes/authRoutes');
-const stockRoutes = require('./routes/stockRoutes');
-const saleRoutes = require('./routes/saleRoutes');
-const purchaseRoutes = require('./routes/purchaseRoutes');
-const hrRoutes = require('./routes/hrRoutes');
-const equipmentRoutes = require('./routes/equipmentRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-const notificationRoutes = require('./routes/notificationRoutes');
-const financeRoutes = require('./routes/financeRoutes');
 
 dotenv.config();
 connectDB();
@@ -86,15 +79,8 @@ app.get("/", (req, res) => {
 });
 app.use('/api/admin', adminRoutes);
 
-// Routes
+// Routes (Sprint 1 scope)
 app.use('/api/auth', authRoutes);
-app.use('/api/stock', stockRoutes);
-app.use('/api/vente', saleRoutes);
-app.use('/api/achat', purchaseRoutes);
-app.use('/api/rh', hrRoutes);
-app.use('/api/equipements', equipmentRoutes);
-app.use('/api/notifications', notificationRoutes);
-app.use('/api/finance', financeRoutes);
 
 // Socket.io connection handling
 io.on('connection', (socket) => {

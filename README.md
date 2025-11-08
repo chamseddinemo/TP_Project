@@ -1,27 +1,34 @@
-# 🌱 Sprint 1 – Base & Authentification (ERP-TP)
+# 🌿 Sprint 2 – RH, Stocks & Équipements (ERP-TP)
 
-Cette branche concentre les fondations de l’ERP : authentification sécurisée, accès aux rôles essentiels (administrateur, employé, client) et tableaux de bord simplifiés. Elle sert de socle pour les évolutions ultérieures.
+Ce sprint enrichit la base du projet (Sprint 1) avec les modules métiers internes : Ressources Humaines, Gestion de stock et Gestion des équipements, accompagnés des notifications internes basiques.
 
 ---
 
 ## 🎯 Objectifs du sprint
 
-- Mettre en place l’architecture Backend + Frontend prête à l’emploi.
-- Gérer l’authentification via JWT (inscription, connexion, rôles).
-- Fournir des tableaux de bord dédiés aux rôles principaux (admin, employé, client).
-- Poser les bases UI/UX (layout, thème clair/sombre, navigation).
+- Étendre l’authentification existante aux rôles opérationnels (RH, Stock, Technicien).
+- Mettre à disposition les modules RH (employés, paie, recrutement).
+- Activer la gestion des produits/stocks avec suivi des fournisseurs.
+- Offrir la supervision des équipements (liste, disponibilité, maintenance prévue).
+- Introduire les notifications internes pour les administrateurs.
 
 ---
 
 ## ✅ Fonctionnalités incluses
 
-- Authentification complète : inscription, login, déconnexion, protection des routes.
-- Gestion des utilisateurs côté admin (liste & rôles).
-- Tableau de bord administrateur connecté aux statistiques backend.
-- Tableaux de bord employé et client (contenu pédagogique, sans modules métiers).
-- Layout réactif avec barre latérale filtrée selon le rôle connecté.
+- **Backend**
+  - Routes REST pour RH (`/api/rh`), Stock (`/api/stock`), Équipements (`/api/equipements`), Notifications (`/api/notifications`).
+  - Statistiques admin enrichies (comptage employés, équipements, stocks).
+  - Modèle utilisateur compatible avec les rôles historiques + nouveaux rôles `employee` & `client`.
 
-> ℹ️ Les modules RH, Stocks, Ventes, Achats, Finance, Notifications et Équipements seront activés dans les sprints suivants.
+- **Frontend**
+  - Tableaux de bord dédiés : Admin, Employé, Client, Stock, RH, Technicien.
+  - Menus contextuels selon les rôles (RH & Employés, Produits & Stocks, Équipements, Notifications).
+  - Pages métiers :
+    - RH : employés, recrutement, feuilles de temps, paie & contrats.
+    - Stock : produits, catégories, inventaire, fournisseurs.
+    - Équipements : liste et suivi de disponibilité.
+  - Notifications internes accessibles côté admin (`/admin/alerts`).
 
 ---
 
@@ -29,82 +36,83 @@ Cette branche concentre les fondations de l’ERP : authentification sécurisée
 
 ### 1. Pré-requis
 - Node.js 18+
-- MongoDB local (par défaut : `mongodb://localhost:27017/erp-tp`)
+- MongoDB local ou Atlas (par défaut : `mongodb://localhost:27017/erp-tp`)
 
-### 2. Configuration
+### 2. Installation & configuration
 ```bash
+# Installer les dépendances si nécessaire
 cd backend
 npm install
-cp .env.example .env   # ou node create-env.js
+node create-env.js   # génère backend/.env si absent
 
 cd ../frontend
 npm install
 ```
 
-### 3. Lancer les services
+### 3. Lancer l’environnement
 ```bash
-# Terminal 1 – Backend
+# Backend (terminal 1)
 cd backend
 npm run dev
 
-# Terminal 2 – Frontend
+# Frontend (terminal 2)
 cd frontend
 npm run dev
 ```
 
 ### 4. URLs
-- Backend API : http://localhost:5000
+- API Backend : http://localhost:5000
 - Frontend : http://localhost:5173
 
 ---
 
 ## 🔐 Comptes de démonstration
 
-| Rôle        | Email             | Mot de passe |
-|-------------|-------------------|--------------|
-| Administrateur | admin@tp.com     | admin123     |
-| Employé (stock) | stock@tp.com     | 123456       |
-| Client (vente)  | vente@tp.com     | 123456       |
+| Rôle            | Email             | Mot de passe |
+|-----------------|-------------------|--------------|
+| Administrateur  | admin@tp.com      | admin123     |
+| Gestion stock   | stock@tp.com      | 123456       |
+| RH              | rh@tp.com         | 123456       |
+| Technicien      | technicien@tp.com | 123456       |
+| Client (vente)  | vente@tp.com      | 123456       |
 
-> Utilisez l’écran de connexion (`/login`) pour accéder aux tableaux de bord correspondants.
+> Se connecter via `/login`, puis accéder aux menus en fonction du rôle attribué.
 
 ---
 
-## 🧭 Navigation dans cette version
+## 🧭 Navigation & modules
 
-- **Admin** → `/dashboard/admin` : vue métriques/alertes + gestion des utilisateurs.
-- **Employé** → `/dashboard/employe` : vue synthétique (soit utilisateur rôle `stock`, `rh`, `employee`, etc.).
-- **Client** → `/dashboard/client` : aperçu simplifié (rôle `vente` ou `client`).
-- `Profil` accessible à tous via le menu latéral ou le menu utilisateur (navbar).
+- **Tableau de bord Admin** : `/dashboard/admin` (stats globales + notifications).
+- **RH** : `/rh/employes`, `/rh/recrutement`, `/rh/temps`, `/rh/paie`.
+- **Stocks** : `/stock/produits`, `/stock/categories`, `/stock/inventaire`, `/stock/fournisseurs`.
+- **Équipements** : `/equipements/liste`.
+- **Notifications** : `/admin/alerts`.
+
+La barre latérale s’adapte automatiquement aux permissions définies dans `src/utils/rolePermissions.js`.
 
 ---
 
 ## 🧪 Vérifications rapides
 
 ```bash
-# Tester la connexion DB
+# Vérifier la base de données
 cd backend
 node setup-database.js
 
-# Vérifier les API essentielles
-curl http://localhost:5000/api/auth/ping
-curl http://localhost:5000/api/admin/stats
+# Tests E2E express
+node test-all-features.js  # nécessite le backend démarré
 ```
 
 ---
 
-## 🔗 Branche précédente
+## 🔗 Branches associées
 
-- `main` – version complète du produit (toutes fonctionnalités).  
-  Utilisez `git checkout main` pour revenir à la version finale.
-
----
-
-## 🔄 Prochain sprint
-
-- `sprint2` activera les modules **RH**, **Stocks** et **Équipements**, ainsi que les notifications internes de base.
+- Branche précédente : [`sprint1`](https://github.com/chamseddinemo/TP_Project/tree/sprint1) – Base & Authentification.
+- Branche suivante : `sprint3` – Ventes, Achats & Rapports (à venir).
+- Branche finale : `main` – version complète du produit.
 
 ---
 
-Bon sprint et bonne démo ! 🚀
+Bon sprint et bonne présentation ! 🚀
+
 

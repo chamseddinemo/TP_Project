@@ -3,10 +3,9 @@ import {
   FaChartLine,
   FaUsers,
   FaBox,
-  FaShoppingCart,
-  FaMoneyBill,
   FaTools,
   FaCog,
+  FaBell,
   FaChevronDown,
   FaBars,
   FaTimes
@@ -24,6 +23,42 @@ const allMenus = [
     path: "/dashboard/admin",
     color: "from-blue-500 to-blue-600",
     getPath: (role) => rolePermissions[role]?.dashboard || "/dashboard/admin"
+  },
+  {
+    title: "RH & Employés",
+    icon: FaUsers,
+    color: "from-green-500 to-green-600",
+    subMenus: [
+      { title: "Employés", path: "/rh/employes" },
+      { title: "Recrutement", path: "/rh/recrutement" },
+      { title: "Feuilles de temps", path: "/rh/temps" },
+      { title: "Paie & Contrats", path: "/rh/paie" }
+    ]
+  },
+  {
+    title: "Produits & Stocks",
+    icon: FaBox,
+    color: "from-yellow-500 to-yellow-600",
+    subMenus: [
+      { title: "Liste produits", path: "/stock/produits" },
+      { title: "Catégories", path: "/stock/categories" },
+      { title: "Stocks & Inventaire", path: "/stock/inventaire" },
+      { title: "Fournisseurs", path: "/stock/fournisseurs" }
+    ]
+  },
+  {
+    title: "Équipements",
+    icon: FaTools,
+    color: "from-purple-500 to-purple-600",
+    subMenus: [
+      { title: "Liste équipements", path: "/equipements/liste" }
+    ]
+  },
+  {
+    title: "Notifications",
+    icon: FaBell,
+    color: "from-red-500 to-red-600",
+    path: "/admin/alerts"
   },
   {
     title: "Paramètres",

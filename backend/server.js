@@ -6,9 +6,13 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const { errorHandler } = require('./utils/errorHandler');
 
-// Routes (Sprint 1 scope)
+// Routes (Sprint 2 scope)
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const hrRoutes = require('./routes/hrRoutes');
+const stockRoutes = require('./routes/stockRoutes');
+const equipmentRoutes = require('./routes/equipmentRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
 
 dotenv.config();
 connectDB();
@@ -77,10 +81,13 @@ if (process.env.NODE_ENV !== 'production') {
 app.get("/", (req, res) => {
   res.send("🚀 Backend connecté !");
 });
-app.use('/api/admin', adminRoutes);
-
-// Routes (Sprint 1 scope)
+// Routes (Sprint 2 scope)
 app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/rh', hrRoutes);
+app.use('/api/stock', stockRoutes);
+app.use('/api/equipements', equipmentRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // Socket.io connection handling
 io.on('connection', (socket) => {
